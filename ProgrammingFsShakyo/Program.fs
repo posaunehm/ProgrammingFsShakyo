@@ -1,5 +1,13 @@
 ﻿open System
 
+///<summary>足し算</summary>
+///<param name="x">左辺</param>
+///<param name="y">右辺</param>
+///<returns>結果</returns>
+let add x y =
+    x + y
+
+
 //メイン関数
 [<EntryPoint>]
 let main(args : string[]) = 
@@ -20,6 +28,6 @@ let main(args : string[]) =
     *)
     printfn "%s, %s at %s" greeting thing timeOfDay
     
-     
+    let x = add 2 3
     
     0 
