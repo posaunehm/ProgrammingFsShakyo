@@ -2,6 +2,8 @@
 
 open System.Numerics
 
+let writeln (s : string) = System.Console.WriteLine s
+
 let ExecuteChapter2 =
     let answerToEverything = 42UL
     let pi = 3.1415926M
@@ -104,9 +106,33 @@ let ExecuteChapter2 =
 
     let ans = f 3
 
-    //シャドウイング
+    //制御文
+    let printGreeting shouldGreet greeting = 
+        if shouldGreet then
+            printfn "%s" greeting
+
+    printGreeting false "Hello"
+    printGreeting true "World"
+
+    //３項演算子みたいな制御文
+    let isEven x = 
+        if x % 2  = 0 then 
+            "はい、偶数です"
+        else
+            "いえ、奇数です"
     
+    writeln (isEven 3)
+    writeln (isEven 8)
 
+    //else系の制御文確認
+    let isWeekday day = 
+        if day = System.DayOfWeek.Monday then true
+        elif day = System.DayOfWeek.Tuesday then true
+        elif day = System.DayOfWeek.Wednesday then true
+        elif day = System.DayOfWeek.Thursday then true
+        elif day = System.DayOfWeek.Friday then true
+        else false
 
+    printfn "%b" (isWeekday System.DateTime.Now.DayOfWeek)
 
     0
