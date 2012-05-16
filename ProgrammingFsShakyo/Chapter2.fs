@@ -135,4 +135,15 @@ let ExecuteChapter2 =
 
     printfn "%b" (isWeekday System.DateTime.Now.DayOfWeek)
 
+    //コアタイプ：Unit
+    let x = ()
+    //関数の戻り値を無視する （= Unit型だと思う）
+    ignore (square 11)
+
+    //こんな感じのをいっぱい書けばいい？まとめて書く方法がある？
+    let ignoreClone (arg : 'a) = ()
+    ignoreClone (square 11)
+    //ignoreClone (3.5 + 4.2)
+    //↑コンパイルエラー
+
     0
