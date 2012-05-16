@@ -80,9 +80,14 @@ let numericDefn =
     let ans = ident 5
     let ans = ident 10.0
     let ans = ident 50L
-
     //算術演算でも書いてみる
     let addGeneric (x : 'a) y = x + y
     let ans = addGeneric 5 5 //制約された！？
+    //let ans addgeneric 5.0 5.0
+    // ↑コンパイルエラー
+
+
+
+    
 
     0
