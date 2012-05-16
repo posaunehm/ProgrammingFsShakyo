@@ -35,6 +35,8 @@ let numericDefn =
     されています"
     let first = multiline.[0]
     let second = multiline.[1]
+    //バイト配列への変換
+    let hello = "Hello"B
     
 
     0
