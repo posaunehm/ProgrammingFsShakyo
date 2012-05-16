@@ -1,8 +1,8 @@
 ﻿module ProgrammingFsShakyo.Chapter2
 
- 
+open System.Numerics
 
-let numericDefn =
+let ExecuteChapter2 =
     let answerToEverything = 42UL
     let pi = 3.1415926M
     let avogadro = 6.022e23
@@ -86,8 +86,27 @@ let numericDefn =
     //let ans addgeneric 5.0 5.0
     // ↑コンパイルエラー
 
+    //スコープ
+    let moduleValue = 1
+    let f = 
+        let functionValue = "hoge"
+        0
+    //let y = functionValue
+    //↑functionValueはスコープ外のためコンパイルエラー
 
+    //スコープ（関数スコープ）
+    let f fParam = 
+        let g gParam = fParam + gParam + moduleValue
 
+        let a = g 1
+        let b = g 2
+        a + b
+
+    let ans = f 3
+
+    //シャドウイング
     
+
+
 
     0

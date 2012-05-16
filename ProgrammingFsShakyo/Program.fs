@@ -24,7 +24,7 @@ let main(args : string[]) =
     *)
     printfn "%s, %s at %s" greeting thing timeOfDay
 
-    let x = numericDefn
+    let x = ExecuteChapter2
 
     0
 
