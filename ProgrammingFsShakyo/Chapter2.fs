@@ -62,4 +62,8 @@ let numericDefn =
     let add x y = x + y
     let ans = add 3 7
 
+    //こうすると・・・？
+    let addOneFloat x = x + 1.0
+    let ans = addOneFloat 5.2   //floatのみ今度は受け付ける
+
     0
