@@ -1,6 +1,7 @@
 ﻿module ProgrammingFsShakyo.Main
 
 open System
+open Chapter2
 
 
 //メイン関数
@@ -22,6 +23,8 @@ let main(args : string[]) =
     Printf.TextWriterFormatのエイリアスっぽい
     *)
     printfn "%s, %s at %s" greeting thing timeOfDay
+
+    let x = numericDefn
 
     0
 
