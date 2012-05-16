@@ -37,6 +37,20 @@ let numericDefn =
     let second = multiline.[1]
     //バイト配列への変換
     let hello = "Hello"B
+
+    //ブール型
+    //各ブール演算子の真偽表を出力する
+    let printTruthTable f = 
+        printfn "     |true   | false |"
+        printfn "     +-------+-------+"
+        printfn "true + %5b | %5b |" (f true true) (f true false)
+        printfn "false+ %5b | %5b |" (f false true) (f false false)
+        printfn "     +-------+-------+"
+        printfn ""
+        ()
+    
+    printTruthTable (&&)
+    printTruthTable (||)
     
 
     0
