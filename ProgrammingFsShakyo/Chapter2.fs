@@ -1,0 +1,2 @@
+﻿module ProgrammingFsShakyo.Chapter2
+

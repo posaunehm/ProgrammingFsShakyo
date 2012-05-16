@@ -1,11 +1,6 @@
-﻿open System
+﻿module ProgrammingFsShakyo.Main
 
-///<summary>足し算</summary>
-///<param name="x">左辺</param>
-///<param name="y">右辺</param>
-///<returns>結果</returns>
-let add x y =
-    x + y
+open System
 
 
 //メイン関数
@@ -27,7 +22,6 @@ let main(args : string[]) =
     Printf.TextWriterFormatのエイリアスっぽい
     *)
     printfn "%s, %s at %s" greeting thing timeOfDay
-    
-    let x = add 2 3
-    
-    0 
+
+    0
+
