@@ -52,5 +52,14 @@ let numericDefn =
     printTruthTable (&&)
     printTruthTable (||)
     
+    //関数定義
+    let square x =  x * x
+    let ans = square 4
+
+    let addOne x = x + 1
+    let ans = addOne 10
+
+    let add x y = x + y
+    let ans = add 3 7
 
     0
