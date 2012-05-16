@@ -66,4 +66,23 @@ let numericDefn =
     let addOneFloat x = x + 1.0
     let ans = addOneFloat 5.2   //floatのみ今度は受け付ける
 
+    //明示的に型を指定もできる
+    let addFloat (x : float) y = x + y
+    let ans = addFloat 4.0 5.0
+
+    //ジェネリック
+    let ident x = x
+    let ans = ident 5
+    let ans = ident 10.0
+    let ans = ident 50L
+    //明示的に書く
+    let ident (x : 'a) = x
+    let ans = ident 5
+    let ans = ident 10.0
+    let ans = ident 50L
+
+    //算術演算でも書いてみる
+    let addGeneric (x : 'a) y = x + y
+    let ans = addGeneric 5 5 //制約された！？
+
     0
