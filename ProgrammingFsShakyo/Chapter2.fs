@@ -169,5 +169,41 @@ let ExecuteChapter2 =
     //こんなこともできた！ネストもそのまま書ける
     let fitst, (second1,second2), third = nested
 
+    //List
+    let vowels = ['a';'e';'i';'o';'u';]
+    let emptyList = [];
+
+    //こう書くと一要素のリストにタプルが入る残念な感じに
+    let vowels_2 = ['a','e','i','o','u']
+
+    //Listも当然イミュータブルなので追加とか削除はできない。
+    //リストを結合させるつける@演算子か先頭ににつけるconsか
+    let odds = [1;3;5;7;9;]
+    let evens = [2;4;6;8;10;]
+    //結合
+    let connected = odds @ evens
+    //先頭に要素付加
+    let connected = 0 :: odds
+    //色々くっつけるのもOK
+    let connceted = -6 :: -4 ::  -2 :: 0 :: evens
+    
+    //Range記法
+    //開始値 → インクリメント値 → 終了値
+    let tens = [0 .. 10 .. 50]
+    //一致しなくてもOK
+    let twelves = [0 .. 20 .. 50]
+    //デクリメントもできる
+    let countDown = [5L .. -1L .. 0L]
+
+    //List Comprehension記法
+    let numberNear x = 
+        [
+            yield x - 1
+            yield x
+            yield x + 1
+        ]
+
+    let numberNear3 =  numberNear 3
+
 
     0
