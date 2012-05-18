@@ -239,4 +239,10 @@ let ExecuteChapter2 =
     
     let ans = primeUnder 100
 
+    //List.Partitionを使ってみる
+    let isMultipleOf5 x = (x % 5 = 0)
+    //5の倍数とそれ以外を分割する
+    let multOf5, nonMultOf5 = 
+        List.partition isMultipleOf5 [1 .. 15]
+
     0
