@@ -146,4 +146,28 @@ let ExecuteChapter2 =
     //ignoreClone (3.5 + 4.2)
     //↑コンパイルエラー
 
+    //Tuple
+    let dinner = ("鯖の干物", "餃子")
+    //タイプは自由
+    let zeros = (0,0L,0.0f,0I)
+    //ネストも可能
+    let nested = (1,(2.0,3M),(4L,'5',"6"))
+    //一つはTupleではない（当たり前か。。。）
+    let single = (3)
+
+    //fstとsndによるアクセス（二要素のみ）
+    let first = fst dinner
+    let seconf = snd dinner
+    //let firstZero = fst zeros
+    //↑コンパイルエラー
+
+    //letバインディングによる割り当て
+    let zero1,zero2,zero3,zero4 = zeros
+    //当然数が足りないと怒られる
+    //let zero1, zero2 = zeros
+
+    //こんなこともできた！ネストもそのまま書ける
+    let fitst, (second1,second2), third = nested
+
+
     0
