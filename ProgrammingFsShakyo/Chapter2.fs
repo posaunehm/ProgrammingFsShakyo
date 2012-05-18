@@ -222,5 +222,21 @@ let ExecuteChapter2 =
 
     let ans = multiplesOf 5
 
+    //素数列挙メソッド
+    let primeUnder max = 
+        [
+            for n in 1 .. max do
+                //Nの時の約数の列挙
+                let factorsOfN = 
+                    [
+                        for i in 1 .. n do
+                            if n % i = 0 then
+                                yield i
+                    ]
+                if factorsOfN.Length = 2 then
+                    yield n
+        ]
+    
+    let ans = primeUnder 100
 
     0
