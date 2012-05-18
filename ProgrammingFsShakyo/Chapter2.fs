@@ -205,5 +205,22 @@ let ExecuteChapter2 =
 
     let numberNear3 =  numberNear 3
 
+    //もうちょっとややこしく
+    let x = 
+        [
+            let negate x = -x
+            for i in 1 .. 10 do
+                if i % 2 = 0 then
+                    yield negate i
+                else
+                    yield i
+        ]
+
+    //do yieldは→で書き換え可能
+    let multiplesOf x = [for i in 1 .. 10 do yield x * i]
+    let multiplesOf x = [ for i in 1 .. 10 -> x * i]
+
+    let ans = multiplesOf 5
+
 
     0
