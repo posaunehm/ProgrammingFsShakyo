@@ -305,4 +305,18 @@ let ExecuteChapter2 =
     let value = Option.get ans
     let value = ans.Value
 
+    //Printf
+    printf "Hello, "
+    printfn "World"
+    //書式指定子
+    let mountain = "K2"
+    let height = 8611
+    let units = 'm'
+    printfn "%s is %d%c high" mountain height units
+    //printfが型安全！！！以下は通らない
+    //printfn "%s is %f.2%c high" mountain height units
+    printfn "%s is %.2f%c high" mountain (float height) units
+    //懐かしのsprintf
+    let k2mountainInfo = sprintf "%s is %d%c high" mountain height units
+
     0
