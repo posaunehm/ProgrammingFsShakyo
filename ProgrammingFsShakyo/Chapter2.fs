@@ -245,4 +245,43 @@ let ExecuteChapter2 =
     let multOf5, nonMultOf5 = 
         List.partition isMultipleOf5 [1 .. 15]
 
+    //List.map
+    //Linqで言うとSelectだな・・・
+    let square x = x * x
+    let ans = List.map square [1 .. 10] 
+
+    //List.reduce
+    //Listの中身をばらして平坦にする
+    //accはaccumulatorの略。演算結果を貯めこむレジスタ
+    //C#のSumとかと似たような動きといえば似たような動き
+    let insertCommas acc item = acc + "," + item
+    let jNames = ["Jack";"Jill";"Jim";"Joe";"Jane"]
+    let ans = List.reduce insertCommas jNames
+
+    //List.fold
+    //accumulatorの初期値を指定できる
+    let ans = List.fold insertCommas "hoge" jNames
+
+    //文章中の母音の数を数える
+    let countVowels (str : string) = 
+        //string型からchar型の配列を作り出す
+        let charList = List.ofSeq str
+
+        let accFunc (As,Es,Is,Os,Us) letter = 
+            if   letter = 'a' then (As + 1, Es , Is, Os, Us)
+            elif letter = 'e' then (As, Es + 1 , Is, Os, Us)
+            elif letter = 'i' then (As, Es, Is + 1, Os, Us)
+            elif letter = 'o' then (As, Es, Is, Os + 1, Us)
+            elif letter = 'u' then (As, Es, Is, Os, Us + 1)
+            else                   (As, Es, Is, Os, Us)
+        //タプルを初期値として代入
+        List.fold accFunc (0,0,0,0,0) charList
+
+    let ans = countVowels "The quick brown fox jumps over the lazy dog"
+
+    //List.iter
+    //ForEachですね
+    let printNumber x = printfn "Printing %d" x
+    List.iter printNumber [0..3..27]
+
     0
