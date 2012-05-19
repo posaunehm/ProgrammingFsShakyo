@@ -2,6 +2,7 @@
 
 open System
 open Chapter2
+open Chapter3
 
 
 //メイン関数
@@ -26,6 +27,7 @@ let main(args : string[]) =
     printfn "%s, %s at %s" greeting thing timeOfDay
 
     ExecuteChapter2
+    ExecuteChapter3
 
     //ExitCodeが必要
     0
