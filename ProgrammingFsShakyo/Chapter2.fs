@@ -319,4 +319,4 @@ let ExecuteChapter2 =
     //懐かしのsprintf
     let k2mountainInfo = sprintf "%s is %d%c high" mountain height units
 
-    0
+    ()

@@ -5,6 +5,7 @@ open Chapter2
 
 
 //メイン関数
+//プロジェクトの最後の一つである必要がある
 [<EntryPoint>]
 let main(args : string[]) = 
     //引数が2つでなければ
@@ -24,7 +25,8 @@ let main(args : string[]) =
     *)
     printfn "%s, %s at %s" greeting thing timeOfDay
 
-    let x = ExecuteChapter2
+    ExecuteChapter2
 
+    //ExitCodeが必要
     0
 
