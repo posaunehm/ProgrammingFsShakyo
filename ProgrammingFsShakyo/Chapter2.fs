@@ -1,6 +1,8 @@
 ﻿module ProgrammingFsShakyo.Chapter2
 
+open System
 open System.Numerics
+
 
 let writeln (s : string) = System.Console.WriteLine s
 
@@ -283,5 +285,24 @@ let ExecuteChapter2 =
     //ForEachですね
     let printNumber x = printfn "Printing %d" x
     List.iter printNumber [0..3..27]
+
+    //Option
+    //Nullableみたいなもんだけど、それよりかは何をした以下が明確で好き
+    let isInteger str = 
+            let successfull, result = Int32.TryParse(str)
+            if successfull then
+                Some(result)
+            else
+                None
+    //使用例
+    let ans = isInteger "134"
+    //値はOption.getで取れる
+    let value = Option.get ans
+    //Valueプロパティでも取れる
+    let value = ans.Value
+    let ans = isInteger "345.6"
+    //Noneになる場合は例外発生
+    let value = Option.get ans
+    let value = ans.Value
 
     0
