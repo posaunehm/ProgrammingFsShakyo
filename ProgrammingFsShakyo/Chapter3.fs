@@ -1,5 +1,6 @@
 ﻿module ProgrammingFsShakyo.Chapter3
 
+open System
 open System.IO
 open System.Text.RegularExpressions
 
@@ -105,5 +106,54 @@ let ExecuteChapter3 =
     let minus = (-)
 
     let ans = minus 5 3
+
+    //関数の組立（Function Composition）
+    //フォルダのファイルサイズを取得
+    //こう書くとほとんど型推論が働かず、冗長
+    let sizeOfFolder folder =
+        //フォルダ直下にある全てのファイルを取得 
+        let filesInFolder : string [] = 
+            Directory.GetFiles(
+                folder, "*.*",
+                SearchOption.AllDirectories)
+        //直下にある全てのファイルからFileInfoクラスを作成
+        let fileInfos : FileInfo[] = 
+            Array.map
+                (fun (file : string) -> new FileInfo(file))
+                filesInFolder
+        //直下にあるファイルの大きさを取得
+        let fileSizes : Int64 [] = 
+            Array.map
+                (fun (info :  FileInfo) -> info.Length)
+                fileInfos
+        //全てのファイルサイズを合計する
+        Array.sum fileSizes
+
+    //とりあえず冗長なので、引数をインライン化
+    //第二引数へは関数をひたすらネストさせていく
+    //意味的には下から上へ登っていくのでわかりづらい！！
+    let uglySizeOfFolder folder = 
+        Array.sum
+            (Array.map
+                (fun (info : FileInfo) -> info.Length)
+                (Array.map
+                    (fun file -> new FileInfo(file))
+                    (Directory.GetFiles(
+                        folder, "*.*",
+                        SearchOption.AllDirectories))))
+
+    //そこでPipe-forward演算子を用いる
+    //let (|>) x f = f x
+    [1..3] |> List.iter (printfn "%d")
+    //List.iter (printfn "%d" [1..3]と同値
+
+    //Pipe-Forward演算子によって型推論が働くようになる
+    //単に第二引数を先に評価するようにするから？
+    let sizeOfFolderPiped folder = 
+        Directory.GetFiles(folder, "*.*", SearchOption.AllDirectories)
+            |> Array.map (fun file -> new FileInfo(file))
+            |> Array.map (fun info -> info.Length)
+            |> Array.sum
+            
 
     ()
