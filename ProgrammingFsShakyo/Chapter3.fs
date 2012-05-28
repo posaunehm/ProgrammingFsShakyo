@@ -71,6 +71,21 @@ let ExecuteChapter3 =
         else
             ()
     forLoop (fun () -> printfn "Looping...") 3
+
+    //相互再帰
+    //andでつなぐことで、そちらで定義される関数も呼び出すことができる。
+    //recの有効範囲を拡張しているようなイメージ
+    let rec isOdd x = 
+        if x = 0 then false
+        elif x = 1 then true
+        else isEven(x - 1)
+    and isEven x = 
+        if x = 0 then true
+        elif x = 1 then false
+        else isOdd(x - 1)
+
+    let ans = isOdd 9
+    let ans = isEven 100
         
 
 
