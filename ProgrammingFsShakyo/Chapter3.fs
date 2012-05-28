@@ -48,5 +48,31 @@ let ExecuteChapter3 =
     //部分関数適用で新たな式を作る
     List.iter (printfn "%d") [1 .. 10]
 
+    //再帰関数
+    //キーワードはrec。recキーワードにより関数定義が終わるまでにその関数を呼ぶことが許可される
+    let rec factorial x = 
+        if x <= 1 then 1
+        else
+            x * factorial (x - 1)
+
+    let ans = factorial 5
+
+    //再帰によるforループ
+    let rec forLoop body times = 
+        if times <= 0 then ()
+        else
+            body()
+            forLoop body (times - 1)
+    //再帰によるwhileループ
+    let rec whileLoop predicate body = 
+        if predicate() then
+            body()
+            whileLoop predicate body
+        else
+            ()
+    forLoop (fun () -> printfn "Looping...") 3
+        
+
+
 
     ()
