@@ -1,6 +1,7 @@
 ﻿module ProgrammingFsShakyo.Chapter3
 
 open System.IO
+open System.Text.RegularExpressions
 
 let ExecuteChapter3 = 
 
@@ -87,7 +88,22 @@ let ExecuteChapter3 =
     let ans = isOdd 9
     let ans = isEven 100
         
+    //演算子の定義
+    //会場の演算子を定義する
+    let (!) = factorial
+    let ans = !5
 
+    //正規表現の一致を定義する
+    let (===) str (regex : string) = 
+        Regex.Match(str, regex).Success
 
+    let ans =  "The quick brown fox" === "The (.*) fox"
+
+    //逆に定義済み演算子を関数として用いることも可能
+    let ans = List.fold (+) 0 [1 .. 10]
+    let ans = List.fold (*) 1 [1 .. 5]
+    let minus = (-)
+
+    let ans = minus 5 3
 
     ()
