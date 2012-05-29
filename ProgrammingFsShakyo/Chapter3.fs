@@ -187,4 +187,16 @@ let ExecuteChapter3 =
 
     let ans = lenOfSquare 128
 
+    //Pipe-Backward演算子
+    //後方パイプ演算子
+    //普通の関数適用順序で適用するだけ、、、
+    List.iter (printfn "%d") [1 .. 3]
+    List.iter (printfn "%d") <| [1 .. 3]
+    
+    //だが演算順序が微妙に変わる
+    printfn "sprintf適用の結果は%sです" (sprintf "(%d,%d)" 1 3)
+    printfn "sprintf適用の結果は%sです" <| sprintf "(%d,%d)" 1 3
+    //↑括弧が消えてる！
+
+
     ()
