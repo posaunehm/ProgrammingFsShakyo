@@ -154,6 +154,37 @@ let ExecuteChapter3 =
             |> Array.map (fun file -> new FileInfo(file))
             |> Array.map (fun info -> info.Length)
             |> Array.sum
-            
+    
+    //Forward Composition演算子
+    //前方合成演算子        
+    //let (>>) f g x = g (f x)
+    //部分関数適用を逆転するイメージ？
+    let sizeOfFolderComposed = 
+        let getFiles folder = 
+            Directory.GetFiles(folder, "*.*", SearchOption.AllDirectories)
+
+        getFiles
+        >> Array.map (fun file -> new FileInfo(file))
+        >> Array.map (fun info -> info.Length)
+        >> Array.sum
+    //適用結果：val sizeOfFolderComposed : (string -> int64)
+    //関数が戻り値となっている
+
+    //もう一例
+    let square x = x * x
+    let toString (x:int) = x.ToString()
+    let strlen (x:string) = x.Length;
+    let lenOfSquare = square >> toString >> strlen
+
+    let ans = lenOfSquare 128
+
+    //こう書くと自明の型推論が！
+    //ただラムダ式書きまくりなので割と微妙
+    let lenOfSquare =
+        fun x -> x * x
+        >> fun x -> x.ToString()
+        >> fun x -> x.Length
+
+    let ans = lenOfSquare 128
 
     ()
