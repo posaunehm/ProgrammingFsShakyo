@@ -198,5 +198,26 @@ let ExecuteChapter3 =
     printfn "sprintf適用の結果は%sです" <| sprintf "(%d,%d)" 1 3
     //↑括弧が消えてる！
 
+    //Backward compososition parameter
+    //後方合成演算子
+    let square x = x * x
+    let negate x = -x
+    
+    //前方合成すると
+    let ans = (square >> negate) -10
+    //10^2 * -1 = -100
+    
+    //明示的に逆順適用
+    let ans = (square << negate) -10
+    //(-1 * 10)^2 = 100
+    //実はこれだよね
+    let ans = square (negate -10)
+
+    //空リストのフィルタリングにも使う
+    let ans = [[1];[];[4;5;6;];[3;4;];[];[];[];[9]] |> List.filter (not << List.isEmpty)
+    //こうすれば同じ順番でかけるけど、だいぶ冗長
+    let ans = [[1];[];[4;5;6;];[3;4;];[];[];[];[9]] |> List.filter (fun x -> not (List.isEmpty x))
+
+
 
     ()
