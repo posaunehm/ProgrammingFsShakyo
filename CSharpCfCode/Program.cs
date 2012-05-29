@@ -11,10 +11,8 @@ namespace CSharpCfCode
     {
         static void Main(string[] args)
         {
-            var path = "C:";
-            var files = Directory.GetFiles(path,"*.*",SearchOption.AllDirectories);
-
-            files.Select(file => new FileInfo(file))
+            Directory.GetFiles("C:", "*.*", SearchOption.AllDirectories)
+                    .Select(file => new FileInfo(file))
                     .Select(info => info.Length)
                     .Sum();
         }
