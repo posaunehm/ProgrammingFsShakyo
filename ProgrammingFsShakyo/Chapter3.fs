@@ -4,6 +4,9 @@ open System
 open System.IO
 open System.Text.RegularExpressions
 
+[<Literal>]
+let Bill = "Bill Gates"
+
 let ExecuteChapter3 = 
 
     let square x = x * x
@@ -272,16 +275,37 @@ let ExecuteChapter3 =
     let ans = greet "Hiroshi"
     //Hello Bill
     
-    //↓なぜかLiteral属性が効かない・・・
-////    Literal属性をつけるとOK
-//    [<Literal>]
-//    let bill = "Bill Gates"
-//    
-//    let greet name = 
-//        match name with
-//        | bill -> "Hello Bill"
-//        | x    -> sprintf "Hello, %s" x
-//        //↑この規則には一致しない（変数billは新しいリテラルとして認識される)
+//    ↓なぜかLiteral属性が効かない・・・
+//    Literal属性をつけるとOK
+    let greet name = 
+        match name with
+        | Bill -> "Hello Bill"
+        | x    -> sprintf "Hello, %s" x
+
+    //whenガード節
+    let highLowGame () =
+        let rng = new Random()
+        let secretNumber = rng.Next() % 100
+
+        let rec highLowGameStep () =
+
+            printfn "秘密の数字を考えてください:"
+            let guessStr = Console.ReadLine()
+            let guess = Int32.Parse(guessStr)
+
+            match guess with
+            | input when input > secretNumber
+                -> printfn "秘密の数字はより小さいです"
+                   highLowGameStep()
+            | input when input = secretNumber
+                -> printfn "正解！！"
+                   ()
+            //ワイルドカードも使える！
+            | _
+                -> printfn "秘密の数字はより大きいです"
+                   highLowGameStep()
+
+        highLowGameStep()
 
 
     ()
