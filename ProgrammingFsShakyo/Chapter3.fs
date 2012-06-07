@@ -218,6 +218,70 @@ let ExecuteChapter3 =
     //こうすれば同じ順番でかけるけど、だいぶ冗長
     let ans = [[1];[];[4;5;6;];[3;4;];[];[];[];[9]] |> List.filter (fun x -> not (List.isEmpty x))
 
+    //パターンマッチ
+    let isOdd x = (x % 2 = 1)
+    //単純なパターンマッチ
+    let descriveNumber x = 
+        match isOdd x with
+        | true -> printfn "x is odd"
+        | false -> printfn "x is Even"
+
+    [1 .. 10]
+    |> List.iter descriveNumber
+    //and演算子
+    let testAnd x y = 
+        match x,y with
+        |true, true -> true
+    //  |true,false -> false
+        |false,true -> false
+        |false,false -> false
+    //ワイルドカード"_"を使うとこんな感じに省略できる
+    let testAnd x y = 
+        match x, y with
+        | true,true -> true
+        | _, _      -> false
+
+    //型マッチがうまくいかない場合、まず警告が発生
+    let testAnd x y = 
+        match x,y with
+        |true, true -> true
+    //  |true,false -> false
+        |false,true -> false
+        |false,false -> false
+    //マッチするパターンがないと、例外発生
+    //testAnd true,false
+
+    //名前付きパターンマッチ
+    let greet name = 
+        match name with
+        | "Robert" -> printfn "Hello, Bob"
+        | "William" -> printfn "Hello, Bill"
+        //変数として受け取ることができる！
+        | x -> printfn "Hello, %s" x
+    greet "Robert"
+    greet "Hiroshi"
+
+    //リテラル値のパターンマッチ
+    let bill = "Bill Gates"
+    let greet name = 
+        match name with
+        | bill -> "Hello Bill"
+        | x    -> sprintf "Hello, %s" x
+        //↑この規則には一致しない（変数billは新しいリテラルとして認識される)
+
+    let ans = greet "Hiroshi"
+    //Hello Bill
+    
+    //↓なぜかLiteral属性が効かない・・・
+////    Literal属性をつけるとOK
+//    [<Literal>]
+//    let bill = "Bill Gates"
+//    
+//    let greet name = 
+//        match name with
+//        | bill -> "Hello Bill"
+//        | x    -> sprintf "Hello, %s" x
+//        //↑この規則には一致しない（変数billは新しいリテラルとして認識される)
 
 
     ()
