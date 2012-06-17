@@ -313,6 +313,16 @@ let ExecuteChapter3 =
         | 'a' | 'b' | 'i' | 'o' | 'u'
             -> true
         | _ -> false
+    //他の記法。
+    let describeNumbers x y = 
+        match x, y with
+        | 1, _
+        | _, 1
+            -> "数字のどちらかは1ですよ"
+        //論理演算子が使える？
+        | (2,_) & (_,2)
+            -> "数字は両方とも2ですよ"
+        | _ -> "それ以外ですね"
         
    
 
