@@ -324,8 +324,22 @@ let ExecuteChapter3 =
             -> "数字は両方とも2ですよ"
         | _ -> "それ以外ですね"
         
-   
-
+    //構造化データのパターンマッチ
+    let testXor x y = 
+       match x, y with
+       //1変数で受け取るとtupleとして取れる
+       | tpl when fst tpl <> snd tpl
+           -> true
+       | true, true -> false
+       | false, false -> false
+    //リスト型を受け取る例
+    let rec listLength l = 
+        match l with
+        | []    -> 0
+        | [_]   -> 1
+        | [_;_] -> 2
+        | [_;_;_] -> 3
+        | hd :: tail -> 1 + listLength tail
 
 
     ()
