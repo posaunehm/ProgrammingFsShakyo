@@ -337,6 +337,15 @@ let ExecuteChapter3 =
         match l with
         | []    -> 0
         | hd :: tail -> 1 + listLength tail
+    //Option型の場合
+    let describeOption o = 
+        match o with
+        | Some(42)  -> "答えは42ですが、質問はなんでしょうか？"
+        | Some(x)   -> sprintf "答えは%dです" x
+        | None      -> "答えはありません"
 
+    Some(42) |> describeOption |> Console.WriteLine
+    Some(2) |> describeOption |> Console.WriteLine
+    None |> describeOption |> Console.WriteLine
 
     ()
