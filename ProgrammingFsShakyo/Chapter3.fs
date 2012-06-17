@@ -307,5 +307,15 @@ let ExecuteChapter3 =
 
         highLowGameStep()
 
+    //パターンマッチのグルーピング
+    let vowelTest c = 
+        match c with
+        | 'a' | 'b' | 'i' | 'o' | 'u'
+            -> true
+        | _ -> false
+        
+   
+
+
 
     ()
