@@ -336,9 +336,6 @@ let ExecuteChapter3 =
     let rec listLength l = 
         match l with
         | []    -> 0
-        | [_]   -> 1
-        | [_;_] -> 2
-        | [_;_;_] -> 3
         | hd :: tail -> 1 + listLength tail
 
 
