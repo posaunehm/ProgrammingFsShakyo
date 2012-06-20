@@ -337,6 +337,14 @@ let ExecuteChapter3 =
         match l with
         | []    -> 0
         | hd :: tail -> 1 + listLength tail
+
+    //リスト型を受け取る場合のバリエーション
+    let rec listLength =
+    //functionキーワードは一引数しか受け取ることはできず、その中でパターンマッチを行うラムダ生成関数となる
+        function
+        | []    -> 0
+        | hd :: tail -> 1 + listLength tail
+
     //Option型の場合
     let describeOption o = 
         match o with
@@ -360,5 +368,9 @@ let ExecuteChapter3 =
 
     //タプルの代入にもワイルドカードが使える
     let _ , second, _ = (1,2,3)
+
+
+
+
 
     ()
