@@ -358,6 +358,7 @@ let ExecuteChapter3 =
     //使用しない引数はワイルドカードで受けられる
     [1 .. 3] |> List.iter (fun _ -> printfn "Step...")
 
-
+    //タプルの代入にもワイルドカードが使える
+    let _ , second, _ = (1,2,3)
 
     ()
