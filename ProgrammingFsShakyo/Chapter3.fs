@@ -348,4 +348,9 @@ let ExecuteChapter3 =
     Some(2) |> describeOption |> Console.WriteLine
     None |> describeOption |> Console.WriteLine
 
+    //letバインディングは内部的にはmatch式と等価
+    //たとえば以下のコードはコンパイル可能（実行時にエラーにはなる）
+    //let 1 = 2
+
+
     ()
