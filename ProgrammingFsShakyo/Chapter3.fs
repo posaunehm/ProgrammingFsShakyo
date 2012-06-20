@@ -355,5 +355,9 @@ let ExecuteChapter3 =
     //match 2 with
     //| 1 -> ...
 
+    //使用しない引数はワイルドカードで受けられる
+    [1 .. 3] |> List.iter (fun _ -> printfn "Step...")
+
+
 
     ()
