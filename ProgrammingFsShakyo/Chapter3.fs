@@ -368,8 +368,6 @@ let ExecuteChapter3 =
 
     //タプルの代入にもワイルドカードが使える
     let _ , second, _ = (1,2,3)
-
-
     ()
 
 //判別共用体
@@ -389,3 +387,14 @@ type PlayingCard =
     | Queen of Suit
     | Jack of Suit
     | ValueCard of int * Suit
+//トランプのデッキの定義
+let deckOfCards = 
+    [
+        for suit in [Spade;Club;Diamond;Club] do
+            yield Ace(suit)
+            yield King(suit)
+            yield Queen(suit)
+            yield Jack(suit)
+            for value in 2 .. 10 do
+                yield ValueCard(value, suit)
+    ]
