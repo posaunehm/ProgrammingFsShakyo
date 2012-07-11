@@ -398,3 +398,25 @@ let deckOfCards =
             for value in 2 .. 10 do
                 yield ValueCard(value, suit)
     ]
+
+//再帰的な判別共用体宣言
+type Statement = 
+    | Print of string
+    | Sequence of Statement * Statement
+    | IfStmt of Expression * Statement * Statement
+and Expression = 
+    | Integer of int
+    | LessThan of Expression * Expression
+    | GreaterThan of Expression * Expression
+
+let program = 
+    IfStmt(
+        GreaterThan(
+            Integer(3),
+            Integer(1)),
+        Print("3 is greater than 1"),
+        Sequence(
+            Print("3 is not"),
+            Print("greater than 1")
+        )
+    )
