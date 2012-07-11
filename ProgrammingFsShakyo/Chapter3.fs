@@ -370,7 +370,22 @@ let ExecuteChapter3 =
     let _ , second, _ = (1,2,3)
 
 
-
-
-
     ()
+
+//判別共用体
+//Enum的なもの
+//トランプの判別共用体
+type Suit =
+    | Heart
+    | Diamond
+    | Spade
+    | Club
+//トランプのカード種別リスト
+let suits = [Heart; Diamond; Spade; Club]
+
+type PlayingCard = 
+    | Ace of Suit
+    | King of Suit
+    | Queen of Suit
+    | Jack of Suit
+    | ValueCard of int * Suit
