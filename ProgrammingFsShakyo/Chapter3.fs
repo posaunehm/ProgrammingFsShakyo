@@ -386,6 +386,20 @@ type PlayingCard =
     | Queen of Suit
     | Jack of Suit
     | ValueCard of int * Suit
+
+    //プロパティの追加
+    member this.Value =
+        match this with
+        | Ace(_)
+            -> 11 
+        |King(_) | Queen(_) | Jack(_)
+            -> 10
+        | ValueCard(x, _)
+            -> x
+    //メソッドの追加
+    member this.IsLarger x =
+        this > x 
+
 //トランプのデッキの定義
 let deckOfCards = 
     [
