@@ -499,3 +499,13 @@ let tom = Manager ("Tom",
                             )
 printOrganization tom
 
+let getCardValue card =
+    match card with
+    | King(_)
+    | Queen(_)
+    | Jack(_)
+        -> 10
+    | ValueCard(number,_)
+        -> number
+//↑warning FS0025: この式のパターン マッチが不完全です たとえば、値 'Ace (_)' はパターンに含まれないケースを示す可能性があります。
+//ここで安易にワイルドカード(_)を使ってしまうと警告が出なくなってしまう。
