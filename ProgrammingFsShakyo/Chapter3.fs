@@ -1,5 +1,4 @@
-﻿module ProgrammingFsShakyo.Chapter3
-
+﻿
 open System
 open System.IO
 open System.Text.RegularExpressions
@@ -420,3 +419,32 @@ let program =
             Print("greater than 1")
         )
     )
+//木構造に判別共用体を用いる
+//二分木
+type BinaryTree = 
+    |Node of int * BinaryTree * BinaryTree
+    |Empty
+
+//二分木を左端から表示する
+let rec printInOrder tree = 
+    match tree with
+    |Node(data,left,right)
+        ->  printInOrder left
+            printfn "Node %d" data
+            printInOrder right
+    |Empty
+        -> ()
+//二分木の例
+let binTree = 
+    Node(2,
+        Node(1,Empty,Empty),
+        Node(4,
+            Node(3,Empty,Empty),
+            Node(5,Empty,Empty)
+            )
+        )
+
+printInOrder binTree
+
+
+
