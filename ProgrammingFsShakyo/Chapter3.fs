@@ -468,5 +468,34 @@ let describeHoleCards cards =
     | [first;second]
         -> sprintf "Two cards: %A and %A" first second
 
+//組織図の表示
+type Employee = 
+    | Manager of string * Employee list
+    | Worker of string
 
+let rec printOrganization worker = 
+    match worker with
+    //一人だけの場合
+    | Worker(name) -> printfn "作業者 %s" name
+    | Manager(name, [Worker(nameWorker)])
+        ->  printfn "マネージャー%sには一人の部下%sがいる"  name nameWorker
+    | Manager(name, [Worker(nameWorker1);Worker(nameWorker2)])
+        ->  printfn "マネージャー%sには二人の部下%sと%sがいる" name nameWorker1 nameWorker2
+    | Manager(name, workerList)
+        ->  printfn "マネージャー%sには次に示す%d人の部下がいる" name workerList.Length
+            workerList |> List.iter (
+                fun(worker) -> 
+                     printf "\t"
+                     printOrganization worker
+                     )
+
+let tom = Manager ("Tom", 
+                            [
+                                Manager("Bob", [Worker("John"); Worker("Smith");Worker("Daniel")]);
+                                Worker("George");
+                                Worker("Jim");
+                                Worker("Fred")
+                            ]
+                            )
+printOrganization tom
 
