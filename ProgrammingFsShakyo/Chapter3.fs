@@ -446,5 +446,27 @@ let binTree =
 
 printInOrder binTree
 
+//二枚のカードの判定
+let describeHoleCards cards = 
+    match cards with
+    | []
+    | [_]
+        -> failwith "Too few cards"
+    | cards when List.length cards > 2
+        -> failwith "Too many cards."
+
+    | [Ace(_); Ace(_)] -> "Pocket Rockets"
+    | [King(_);King(_)] -> "Cowboys"
+    | [ValueCard(2, _); ValueCard(2,_)] -> "Docks"
+
+    |[Queen(_);Queen(_)]
+    |[Jack(_);Jack(_)]
+        -> "Pair of Face Cards"
+
+    | [ValueCard(x,_);ValueCard(y,_)] when x = y
+        -> "A Pair"
+    | [first;second]
+        -> sprintf "Two cards: %A and %A" first second
+
 
 
