@@ -599,6 +599,44 @@ let y = lazy (
 //ここでx・yが生成される
 let z = y.Value;
 //二度目以降は使いまわされるので生成時に実行される関数はもう実行されない
-let z = y.Value;
+z = y.Value;
 
+//Sequence（Seq）
+//遅延評価されるリスト。C#的にはIEnumerableですよね。
+let numSeq = seq{1..5}
+numSeq |> Seq.iter (printfn "%d")
+
+//Seqなら問題なく定義できるが・・・
+let allPositiveInteger = 
+    seq{for i in 1 .. System.Int32.MaxValue -> i}
+//ListだとOutofMemoryで落ちてしまう。
+let allPositiveIntegerList = 
+    [for i in 1 .. System.Int32.MaxValue -> i]
+
+//リストの列挙記法と同じ記法が使える
+let allAlphabet = seq{'a' .. 'z'}
+allAlphabet |> Seq.take 4
+
+//列挙のたびに出力を出すようにしたもの
+let noisyAlphabet = 
+    seq{ for i in 'a' .. 'z' do
+            printfn "%c" i
+            yield i}
+//これは何度実行しても同じように出力が出る
+noisyAlphabet |> Seq.take 5
+
+open System.IO
+//シークエンスを結合して返す構文がある。
+//yield!（yield Bang!）を使う
+let rec allFileUnder basepath = 
+    seq{
+        //まず今のフォルダ上のファイルを列挙
+        yield! Directory.GetFiles(basepath)
+        //次に今のフォルダの下のディレクトリ上のファイルを列挙していく
+        for subdir in Directory.GetDirectories(basepath) do
+            yield! allFileUnder subdir
+        }
+
+let allFiles = allFileUnder @"K:\"
+allFiles |> Seq.iter (printfn "%s")
 
