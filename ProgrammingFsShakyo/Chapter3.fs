@@ -523,3 +523,66 @@ let getCardValue card =
         -> number
 //↑warning FS0025: この式のパターン マッチが不完全です たとえば、値 'Ace (_)' はパターンに含まれないケースを示す可能性があります。
 //ここで安易にワイルドカード(_)を使ってしまうと警告が出なくなってしまう。
+
+//レコード
+//データをグルーピングするための型。どことなく構造体っぽい？
+//Firstネーム、Secondネーム、年齢を持つレコードPersonの定義
+type Person = {First:string; Second:string; Age:int}
+
+let Taro:Person = {First = "Taro"; Second = "Yamada"; Age = 20}
+printfn "%s %s %d才" Taro.Second Taro.First Taro.Age
+
+//withキーワードを使って一部を引き継ぎ別のものをクローンできる
+let Hanako = {Taro with First = "Hanako"; Age=18}
+printfn "%s %s %d才" Hanako.Second Hanako.First Hanako.Age
+
+let Jiro = {Taro with First = "Jiro"; Age=15}
+let Tohru = {Taro with First = "Tohru"; Age = 40}
+let Keiko = {Taro with First = "Keiko";Age = 38}
+let YamadaFamily = [Taro;Jiro;Hanako;Tohru;Keiko]
+
+//パターンマッチ（中括弧に入れて使う）
+let age20s = YamadaFamily
+                 |> List.filter
+                    (function
+                    | {Age = 20} ->true
+                    | _ ->false)
+//whenガードはこれでいける
+let pverage20s = YamadaFamily
+                 |> List.filter
+                    (function
+                    | {Age = x} when x > 20 ->true
+                    | _ ->false)
+//型推論(使用方法からの型推論を行ってくれる)
+let isFamily psn1 psn2 =
+    psn1.Second = psn2.Second
+//こっちはテキストの例
+type Point = {X:double;Y:double}
+let calcDistance pt1 pt2 =
+    let square x = x * x
+    sqrt <| square(pt1.X - pt2.X) + square(pt1.Y - pt2.Y)
+
+calcDistance {X = 0.0; Y=0.0} {X=10.0;Y=10.0}
+//型が持つ変数名かぶってしまうと厄介なことに（方推論がうまくいかなくなる）
+type Vector = {X:double;Y:double;Z:double}
+//これだと引数がVectorとみなされるので・・・
+let calcDistance2 pt1 pt2 =
+    let square x = x * x
+    sqrt <| square(pt1.X - pt2.X) + square(pt1.Y - pt2.Y)
+//引数の型を指定する
+let calcDistance2 (pt1:Point) (pt2:Point) =
+    let square x = x * x
+    sqrt <| square(pt1.X - pt2.X) + square(pt1.Y - pt2.Y)
+//宣言時も型指定をするか
+let point:Point = {X = 0.0; Y=0.0}
+//宣言時の要素で型を指定する
+let point = {Point.X = 0.0; Point.Y=0.0}
+
+//メンバ関数やプロパティを持つこともできる
+type Vector2 = 
+    {X:double;Y:double;Z:double}
+    member this.Length = 
+        sqrt <| this.X ** 2.0 + this.Y**2.0 + this.Z**2.0
+    member this.sum (vec2:Vector2) =
+        {X = this.X + vec2.X; Y=this.Y + vec2.Y;Z=this.Z + vec2.Z}
+
