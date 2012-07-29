@@ -586,3 +586,19 @@ type Vector2 =
     member this.sum (vec2:Vector2) =
         {X = this.X + vec2.X; Y=this.Y + vec2.Y;Z=this.Z + vec2.Z}
 
+//Lazy
+//使用されるまで実際には生成されないクラス。一度生成されるとそれを使いまわす。
+//生成したい値を返す関数を引数として渡す
+let x = Lazy<int>.Create(fun () -> 
+    printfn "Evaluating x..."
+    10)
+//lazyキーワードだと方推論してくれて楽ちん？
+let y = lazy (
+    printfn "Evaluating y..."
+    x.Value + x.Value)
+//ここでx・yが生成される
+let z = y.Value;
+//二度目以降は使いまわされるので生成時に実行される関数はもう実行されない
+let z = y.Value;
+
+
