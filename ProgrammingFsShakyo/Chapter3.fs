@@ -640,3 +640,15 @@ let rec allFileUnder basepath =
 let allFiles = allFileUnder @"K:\"
 allFiles |> Seq.iter (printfn "%s")
 
+//seq.unfold
+//関数（漸化式）からシーケンスを生成する（foldの逆みたいな感じですね、確かに）
+let nextFibUnder100 (past,current) = 
+    if((past + current) > 100) then
+        None
+    else
+        let next = past + current
+        printfn "next:%d, state:%d" next current
+        Some(next, (current,next))
+         
+let fib100 = Seq.unfold nextFibUnder100 (0,1)
+fib100 |> Seq.iter (printfn "%d" )
