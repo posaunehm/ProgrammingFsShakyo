@@ -13,3 +13,10 @@ let isNull = function null -> true | _ -> false
 isNull "文字列"
 isNull (null : string)
 
+//F#の型はnullにできない。代わりにOptionを使うべき
+type Thing = Animal | Plant | Mineral
+let testThing = function
+    | Animal -> "Animal"
+    | Plant -> "Plant"
+    | Mineral -> "Mineral"
+   // | null -> "null" //<-型Thingにnullは適用できません
