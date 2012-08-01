@@ -652,3 +652,95 @@ let nextFibUnder100 (past,current) =
          
 let fib100 = Seq.unfold nextFibUnder100 (0,1)
 fib100 |> Seq.iter (printfn "%d" )
+
+//Query:要はLinqのクエリ式相当？いや、それ以上
+//普通に描くとこんな感じ
+let allFamilyOver age = 
+    YamadaFamily
+    |> Seq.filter (fun mem -> mem.Age > age)
+    |> Seq.map (fun mem -> mem.Second + " " + mem.First)
+    |> Seq.distinct
+
+allFamilyOver 10
+
+//F#クエリ式だと・・・
+let q_allFamilyOver age = 
+    query{
+        for mem in YamadaFamily do
+        where (mem.Age > age)
+        select (mem.Second + " " + mem.First)
+        distinct
+    }
+
+q_allFamilyOver 18
+
+//Processでクエリ式を遊ぶ
+open System.Diagnostics
+
+let activeProcCount = 
+    query{
+        for proc in Process.GetProcesses() do
+        count
+    }
+
+let heaviestProc = 
+    query{
+        for proc in Process.GetProcesses() do
+        sortByDescending proc.WorkingSet64
+        head
+    }
+//select, where
+let windowedProc = 
+    query{
+        for proc in Process.GetProcesses() do
+        where (proc.MainWindowHandle <> nativeint 0)
+        select proc.ProcessName
+    }
+windowedProc |> Seq.iter (fun(proc) -> printfn "%s" proc)
+
+//contains
+let isChromeRunning = 
+    query{
+        for proc in Process.GetProcesses() do
+        select proc.ProcessName
+        contains ("chrome")
+    }
+//count
+let activeProcCount = 
+    query{
+        for proc in Process.GetProcesses() do
+        where (proc.MainWindowHandle <> nativeint 0)
+        count
+    }
+//distinct
+let processNames = 
+    query{
+        for proc in Process.GetProcesses() do
+        select proc.ProcessName
+    }
+processNames |> Seq.iter (printfn "%s")
+let processNamesDistinct = 
+    query{
+        for proc in Process.GetProcesses() do
+        select proc.ProcessName
+        distinct
+    }
+processNamesDistinct |> Seq.iter (printfn "%s")
+
+//maxBy
+let mostHeavyProcessMem =
+    query{
+        for proc in Process.GetProcesses() do
+        maxBy proc.WorkingSet64
+    }
+
+//sort系演算子
+let sortedProc = 
+    query{
+        for proc in Process.GetProcesses() do
+        let isWindowed = proc.MainWindowHandle <> nativeint 0
+        sortBy isWindowed
+        thenBy proc.ProcessName
+        select proc.ProcessName
+    }
+sortedProc |> Seq.iter (printfn "%s")
