@@ -20,3 +20,12 @@ let testThing = function
     | Plant -> "Plant"
     | Mineral -> "Mineral"
    // | null -> "null" //<-型Thingにnullは適用できません
+
+//Alias（参照値の共有）
+//配列（参照型）でxを定義
+let x = [|0|]
+//参照を代入
+let y = x
+//xを変更
+x.[0] <- 3
+y //<-ここでyも変わっている
