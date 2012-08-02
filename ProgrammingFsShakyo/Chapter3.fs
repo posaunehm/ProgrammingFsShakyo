@@ -1,4 +1,5 @@
-﻿
+﻿module ProgrammingFsShakyo.Chapter3
+
 open System
 open System.IO
 open System.Text.RegularExpressions
@@ -570,13 +571,13 @@ let calcDistance2 pt1 pt2 =
     let square x = x * x
     sqrt <| square(pt1.X - pt2.X) + square(pt1.Y - pt2.Y)
 //引数の型を指定する
-let calcDistance2 (pt1:Point) (pt2:Point) =
+let calcDistance3 (pt1:Point) (pt2:Point) =
     let square x = x * x
     sqrt <| square(pt1.X - pt2.X) + square(pt1.Y - pt2.Y)
 //宣言時も型指定をするか
 let point:Point = {X = 0.0; Y=0.0}
 //宣言時の要素で型を指定する
-let point = {Point.X = 0.0; Point.Y=0.0}
+let point2 = {Point.X = 0.0; Point.Y=0.0}
 
 //メンバ関数やプロパティを持つこともできる
 type Vector2 = 
@@ -706,7 +707,7 @@ let isChromeRunning =
         contains ("chrome")
     }
 //count
-let activeProcCount = 
+let activeProcCount2 = 
     query{
         for proc in Process.GetProcesses() do
         where (proc.MainWindowHandle <> nativeint 0)
